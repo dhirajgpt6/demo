@@ -15,5 +15,9 @@ public class FindDuplicate {
         Set<Integer> set = new HashSet<>();
         Set<Integer> result = list.stream().filter(x->!set.add(x)).collect(Collectors.toSet());
         System.out.println(result);
+
+        // find the sum of all even number from the list
+        Integer evenNumberSum = list.stream().filter(e->e%2==0).mapToInt(sum->sum).sum();
+        System.out.println(evenNumberSum);
     }
 }
