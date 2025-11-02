@@ -6,20 +6,22 @@ import java.util.stream.Collectors;
 
 public class SelfPracticeNumbers {
     public static void main(String[] args) {
-        // Find 2nd largest number in a list
-        List<Integer> numbers = Arrays.asList(10, 20, 30, 8, 5);
-        Optional<Integer> res = numbers.stream().sorted(Comparator.reverseOrder()).skip(1).findFirst();
-        System.out.println(res.orElse(null));
 
         List<Integer> numberList = Arrays.asList(10,20,30,40,50,10,20,60);
-        // print distinct numbers
-        numberList.stream().distinct().forEach(System.out::println);
 
-        // count occurrence of each number
+        // Find 2nd largest number in a list OUTPUT: 50
+        Optional<Integer> res = numberList.stream().sorted(Comparator.reverseOrder()).skip(1).findFirst();
+        System.out.println(res.orElse(null));
+
+        // count occurrence of each number. OUTPUT: {50=1, 20=2, 40=1, 10=2, 60=1, 30=1}
         Map<Integer, Long> a=  numberList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println(a);
 
-        // print duplicate numbers
+        // print distinct numbers / remove duplicate numbers from list. OUTPUT: [10, 20, 30, 40, 50, 60]
+        System.out.println("Distinct numbers:");
+        numberList.stream().distinct().forEach(System.out::println);
+
+        // print duplicate numbers OUTPUT: [10, 20]
         List<Integer> re = numberList.stream().collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new ,Collectors.counting()))
                 .entrySet().stream().filter(e->e.getValue()>1).map(Map.Entry::getKey).collect(Collectors.toList());
         System.out.println(re);
@@ -27,12 +29,13 @@ public class SelfPracticeNumbers {
         Set<Integer> duplicates = numberList.stream().filter(n -> Collections.frequency(numberList, n) > 1).collect(Collectors.toSet());
         System.out.println("Duplicates: " + duplicates);
 
-
-        // print non-repeated numbers / unique numbers from list
+        // print non-repeated numbers. OUTPUT: [30, 40, 50, 60]
+        System.out.println("Non-repeated numbers:");
         numberList.stream().collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new ,Collectors.counting()))
                 .entrySet().stream().filter(e->e.getValue()==1).forEach(e-> System.out.println(e.getKey()));
 
         //2nd way to find unique element from the list
+        System.out.println("Unique numbers:");
         Set<Integer> unique = numberList.stream().filter(n -> Collections.frequency(numberList, n) == 1).collect(Collectors.toSet());
         System.out.println("Unique: " + unique);
 
