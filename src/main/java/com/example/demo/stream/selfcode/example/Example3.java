@@ -9,7 +9,7 @@ public class Example3 {
 //find the string which start and end with same word
         List<String> data = Arrays.asList("abc", "mnm", "xlx", "xyz", "fkf", "qwe");
         data.stream().filter(x-> !x.isEmpty() && x.endsWith(String.valueOf(x.charAt(0)))).forEach(System.out::println);
-
+        List<String> d = data.stream().filter(a-> a.endsWith(String.valueOf(a.charAt(0)))).collect(Collectors.toList());
         // fetch the longest name from the list
         System.out.println("Longest name from the list");
         List<String> nameList = Arrays.asList("Ram", "Shyam", "Mohan", "So", "Ramesh","Raghunath");
