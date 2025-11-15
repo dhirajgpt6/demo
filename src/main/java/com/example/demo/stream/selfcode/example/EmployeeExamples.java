@@ -67,15 +67,19 @@ public class EmployeeExamples {
         Optional<Employee2> emap = empList.stream()
                 .filter(x->x.getDepartment() == "Java")
                 .max(Comparator.comparingDouble(Employee2::getSalary));
+
+        Optional<Employee2> emap2 = empList.stream()
+                .filter(x->x.getDepartment() == "Java").collect(Collectors.maxBy(Comparator.comparingDouble(Employee2::getSalary)));
         System.out.println("5. **************Department 'Java' Highest salary Employee *****************************");
         System.out.println(emap);
+        System.out.println(emap2);
 
 //      6. print the name of employee whose salary is greater than 20000
         List<String> collect = empList.stream().filter(x -> x.getSalary() > 20000).map(Employee2::getName).collect(Collectors.toList());
         System.out.println(collect);
 
         Map<String, Optional<Employee2>> data = empList.stream().collect(Collectors.groupingBy(Employee2::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee2::getSalary))));
-        data.forEach((key,value)-> System.out.println( key+ ":" +value.get().getSalary()));
+        data.forEach((key,value)-> System.out.println( key+ ":--------:" +value.get().getSalary()));
     }
     private static void createEmployeeList(List<Employee2> empList){
         empList.add(new Employee2(111, "Ram", 32, "No", "HR", 2000, 9000));
