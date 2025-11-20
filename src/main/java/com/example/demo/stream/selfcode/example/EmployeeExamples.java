@@ -27,8 +27,6 @@ public class EmployeeExamples {
 
 
 
-
-
 //        2. ############################################## Program to print max salary of an employee from each department ####################################################################################
         Map<String, Optional<Employee2>> maxSalaryByDepartment = empList.stream()
                 .collect(Collectors.groupingBy(Employee2::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee2::getSalary))));
@@ -93,4 +91,5 @@ public class EmployeeExamples {
         empList.add(new Employee2(119, "Vishnu", 33, "Yes", "Finance", 2002, 65000));
         empList.add(new Employee2(120, "ShaniDev", 40, "Yes", "Finance", 2000, 83000));
     }
+
 }
