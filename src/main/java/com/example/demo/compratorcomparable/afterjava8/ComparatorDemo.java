@@ -34,8 +34,9 @@ public class ComparatorDemo {
         // 2.Sort the list of integers in descending order and print the result
 
         List<Integer> nums = Arrays.asList(3,2,90,34,21,12);
+        nums.sort(Comparator.naturalOrder());
+        System.out.println("nums in ascending order" + nums);
         nums.sort(Comparator.reverseOrder());
-
         System.out.println("nums in reverse order : "+nums);
 
 
