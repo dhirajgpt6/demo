@@ -1,18 +1,32 @@
 package com.example.demo.common;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.catalina.realm.CombinedRealm;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CommonPractice {
     public static void main(String[] args) {
-        List<Employee> empList = new ArrayList<>();
-        createEmployeeList(empList);
-
-        for (Employee emp : empList){
-            System.out.println(emp);
-        }
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private static void createEmployeeList(List<Employee> empList){
         empList.add(new Employee(111, "Ram", 32, "No", "HR", 2000, 9000));
