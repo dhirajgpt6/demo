@@ -3,6 +3,7 @@ package com.example.demo.stream.selfcode.example;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class SelfPracticeNumbers {
     public static void main(String[] args) {
@@ -143,7 +144,7 @@ public class SelfPracticeNumbers {
         Integer secondHighest = list.stream().sorted(Comparator.reverseOrder()).skip(1).findFirst().orElse(null);
         System.out.println(secondHighest);
 
-//      How do you find the second lowest number in a list using Stream API?
+//      How do you find the second-lowest number in a list using Stream API?
         System.out.println("20. ");
         Integer secondLowest = list.stream().sorted(Comparator.naturalOrder()).skip(1).findFirst().orElse(null);
         System.out.println(secondLowest);
@@ -159,5 +160,10 @@ public class SelfPracticeNumbers {
         System.out.println("22. ");
         boolean allPositive = list.stream().anyMatch(e-> e > 0);
         System.out.println(allPositive);
+
+//        Find sum from number 1 to 100
+        int sum1 = IntStream.rangeClosed(1, 100).filter(n -> n % 2 == 0).sum();
+        System.out.println(sum1);  // 2550
+
     }
 }
