@@ -341,12 +341,39 @@ public class SelfPracticeString {
 //        ================================================================================================================
         System.out.println("28. Find the second most frequent character");
         String s28 = "success"; // OUTPUT: 'c'
+        Character secondMostFreq = s28.chars().mapToObj(c->(char)c).collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new,Collectors.counting())).entrySet()
+                .stream()
+                .sorted((e1,e2)-> Long.compare(e2.getValue(), e1.getValue()))
+                .skip(1)
+                .map(e->e.getKey())
+                .findFirst().orElse(null);
+        System.out.println(secondMostFreq);
 //        ================================================================================================================
         System.out.println("29. Remove adjacent duplicate characters (aaabb → ab)");
         String s29 = "aaabbccaaa"; // OUTPUT: "abca"
+
+        String s29rest = s29.chars().mapToObj(e->(char)e).distinct().map(String::valueOf)
+                .collect(Collectors.joining());
+
+        System.out.println(s29rest); //wrong (its remove duplicates)
+
+        StringBuilder sb29 = new StringBuilder();
+        char prev = 0;
+        for (char c: s29.toCharArray()){
+            if (c != prev){
+                sb29.append(c);
+                prev = c;
+            }
+        }
+        System.out.println(sb29);
 //        ================================================================================================================
         System.out.println("30. Check if a string is a valid palindrome (ignore case + spaces)");
         String s30 = "A man a plan a canal Panama"; // OUTPUT: true
+        String clean = s30.replace(" ","").toLowerCase();
+        StringBuilder cleanReverse = new StringBuilder(clean).reverse();
+        System.out.println(clean);
+        System.out.println(cleanReverse);
+        System.out.println(clean.equals(cleanReverse.toString()));
 //        ================================================================================================================
         System.out.println("31. Longest common prefix among a list of strings");
         String[] s31 = {"flower", "flow", "flight"}; // OUTPUT: "fl"

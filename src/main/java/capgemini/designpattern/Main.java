@@ -2,7 +2,7 @@ package capgemini.designpattern;
 
 public class Main {
     public static void main(String[] args) {
-        String type  = "fast";
+        String type  = "slow";
         String name =  "A";
         int power = 20;
         Player player = PlayerFactory.createPlayer(type, name, power);
