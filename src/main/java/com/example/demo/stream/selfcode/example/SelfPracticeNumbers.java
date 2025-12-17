@@ -30,6 +30,7 @@ public class SelfPracticeNumbers {
         Integer max5 =list.stream().collect(Collectors.maxBy(Integer::compareTo)).get();
         System.out.println(max5);
 
+
 //      How do you find the minimum number in a List<Integer>?
         System.out.println("4. Find Minimum Number");
         Integer min = list.stream().sorted(Comparator.naturalOrder()).findFirst().orElse(null);
@@ -158,7 +159,7 @@ public class SelfPracticeNumbers {
 
 //      How do you check if all numbers in the list are positive using streams?
         System.out.println("22. ");
-        boolean allPositive = list.stream().anyMatch(e-> e > 0);
+        boolean allPositive = list.stream().allMatch(e-> e > 0);
         System.out.println(allPositive);
 
 //        Find sum from number 1 to 100

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class Employee2 {
     private int id;
