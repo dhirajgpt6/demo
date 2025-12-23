@@ -14,6 +14,10 @@ public class FindMissingNumber {
     // -------------------------------
     // 1️⃣ Swap / Index Placement (O(1) space) ⭐⭐⭐⭐⭐
     // -------------------------------
+//    Main har positive number x ko uski correct position par rakh dunga.
+//    Correct position ka matlab hota hai:
+//    number x → index x-1 eg. 1 ko 0 index pe, 2 ko 1 index pe, 3 ko 2nd index pe, 4 ko 3rd index pe
+//    Phir array ko scan karke jahan mismatch milega, wahi answer hoga.”
     public static int firstMissingPositiveSwap(int[] nums) {
         int n = nums.length;
 
@@ -65,11 +69,11 @@ public class FindMissingNumber {
                 .filter(x -> x > 0)
                 .boxed()
                 .collect(Collectors.toSet());
-        IntStream.rangeClosed(1, set.size() + 1).forEach(System.out::println);
-        return IntStream.rangeClosed(1, set.size())
+
+        return IntStream.rangeClosed(1, nums.length + 1)
                 .filter(i -> !set.contains(i))
                 .findFirst()
-                .orElse(set.size() + 78);
+                .orElse(nums.length + 1);
     }
 
     // -------------------------------
