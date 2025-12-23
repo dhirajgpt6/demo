@@ -391,6 +391,18 @@ public class SelfPracticeString {
         String s35 = "welcometojava"; // k=3 smallest="ava", largest="wel"
 
 //        ================================================================================================================
+        String s36 = "HappynewYear";
+        char[] charArray = s36.toCharArray();
+        Set<Character> charSet = new LinkedHashSet<>();
+        StringBuilder sb11 = new StringBuilder();
+        for (char c: charArray){
+            if(charSet.add(c)){
+                sb11.append(c);
+            }
+        }
+        System.out.println(sb11);
+
+//        ================================================================================================================
         //        // COMMON STRINGS
 //        String s1 = "Programming123@2025";
 //        String s2 = "Java is easy and Java is powerful";

@@ -163,8 +163,51 @@ public class SelfPracticeNumbers {
         System.out.println(allPositive);
 
 //        Find sum from number 1 to 100
+        System.out.println("23. ");
         int sum1 = IntStream.rangeClosed(1, 100).filter(n -> n % 2 == 0).sum();
         System.out.println(sum1);  // 2550
+
+//        reverse the array
+        System.out.println("24. Reverse the array");
+         int[] reverseit = {1,2,3,4,5};
+        System.out.println(Arrays.toString(reverseit));
+        int left = 0;
+        int right = reverseit.length - 1;
+        while (left<right){
+            int temp = reverseit[left];
+            reverseit[left] = reverseit[right];
+            reverseit[right] = temp;
+            left++;
+            right--;
+        }
+        System.out.println(Arrays.toString(reverseit));
+//
+        System.out.println("25. reverse the number");
+        int x= 1234;
+        int reversenum = 0;
+
+        while (x > 0){
+            int rem = x%10;
+            reversenum = reversenum * 10 + rem;
+            x= x/10;
+        }
+        System.out.println(reversenum);
+        //Print the pattern 0 1 1 2 3 5 Fibonacci Series
+        System.out.println("26. Fibonacci");
+
+        int x26First = 0;
+        int x26Second = 1;
+        System.out.print(x26First + " " + x26Second + " ");
+
+        for (int i=2; i<=5; i++){
+            int c = x26First + x26Second;
+            System.out.print(c + " ");
+            x26First = x26Second;
+            x26Second = c;
+        }
+
+        // {-9, 0, 2, 1, 1, 3, 5, 6} find least missing positive number
+
 
     }
 }

@@ -9,7 +9,7 @@ public class ThreadBasicExample1 {
 
 
         Thread t1 = new Thread(task);
-        t1.start();
+        t1.run();
 
         Thread t2 = new Thread(task1);
         t2.start();
