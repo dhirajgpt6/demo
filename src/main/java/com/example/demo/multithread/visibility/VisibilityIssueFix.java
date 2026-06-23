@@ -11,6 +11,7 @@ public class VisibilityIssueFix {
     public void runTask() {
         System.out.println("Task started...");
         while (running) {
+            System.out.println("Status: " +running);
             // Now loop will exit correctly
         }
         System.out.println("Task stopped!");

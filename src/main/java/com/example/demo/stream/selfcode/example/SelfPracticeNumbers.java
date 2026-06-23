@@ -1,9 +1,14 @@
 package com.example.demo.stream.selfcode.example;
 
+import com.example.demo.common.Employee;
+import lombok.Builder;
+import lombok.experimental.SuperBuilder;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class SelfPracticeNumbers {
     public static void main(String[] args) {
@@ -54,6 +59,7 @@ public class SelfPracticeNumbers {
         Integer a = list.stream().mapToInt(i->i).sum();
         System.out.println(a);
 
+
 //        How do you calculate the average of numbers using streams?
         System.out.println("6. Find Average of List");
         Double avg = list.stream().mapToInt(i->i).average().getAsDouble();
@@ -87,6 +93,7 @@ public class SelfPracticeNumbers {
         list.stream().collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new ,Collectors.counting())).entrySet().stream()
                 .filter(e->e.getValue()==1)
                 .forEach(e-> System.out.println(e.getKey()));
+
 
         //2nd way
         Set<Integer> unique = list.stream().filter(n -> Collections.frequency(list, n) == 1).collect(Collectors.toSet());
@@ -207,6 +214,7 @@ public class SelfPracticeNumbers {
         }
 
         // {-9, 0, 2, 1, 1, 3, 5, 6} find least missing positive number
+
 
 
     }

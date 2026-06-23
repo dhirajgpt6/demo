@@ -23,3 +23,49 @@ public class Example4 {
         });
     }
 }
+
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+
+        // Sum of current window
+        double sum = 0;
+
+        // Stores maximum window sum found so far
+        double maxSum = 0;
+
+        // Calculate sum of first window of size k
+        // Example:
+        // nums = [1,12,-5,-6,50,3], k = 4
+        // First window = [1,12,-5,-6]
+        // sum = 1 + 12 - 5 - 6 = 2
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+
+        // First window sum is the initial maximum sum
+        maxSum = sum;
+
+        // Slide the window one element at a time
+        for (int i = k; i < nums.length; i++) {
+
+            // Add new element entering the window
+            // Subtract old element leaving the window
+            //
+            // Example:
+            // Previous window = [1,12,-5,-6] => sum = 2
+            //
+            // Next window = [12,-5,-6,50]
+            //
+            // sum = 2 + 50 - 1 = 51
+            sum += nums[i] - nums[i - k];
+
+            // Update maximum sum if current window sum is larger
+            if (sum > maxSum) {
+                maxSum = sum;
+            }
+        }
+
+        // Average = Maximum Window Sum / Window Size
+        return maxSum / k;
+    }
+}

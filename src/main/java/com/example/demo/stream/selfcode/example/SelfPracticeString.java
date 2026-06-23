@@ -3,12 +3,14 @@ package com.example.demo.stream.selfcode.example;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SelfPracticeString {
     public static void main(String[] args) {
 //================================================================================================================
         System.out.println("1. Count occurrence of each character in a string");
         String s1 = "India is my country"; // OUTPUT: {I=1, n=2, d=1, i=2, a=1, ...}
+        s1.chars().mapToObj(e->(char)e).collect(Collectors.groupingBy(Function.identity(), Collectors.counting())).forEach((k,v)-> System.out.println(k + v));
         //        -----------------------------------------------------------------------------
         //1st Way
         Map<String, Long> s1Result = Arrays.stream(s1.split(""))
@@ -22,10 +24,22 @@ public class SelfPracticeString {
                 .filter(c -> !Character.isWhitespace(c))  // Convert int to char
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println(charCountMapWithoutSpace);
+        //3rd Way
+        Map<Character, Integer> result1 = new HashMap<>();
+        for (int i=0; i<s1.length(); i++) {
+            char c = s1.charAt(i);
+            result1.compute(c, (k,v) -> v==null?1:v+1);
+        }
+        System.out.println("Using Compute :" +result1);
+        Map<Character, Long> collect = s1.chars()
+                .mapToObj(c-> (char)c)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
 //================================================================================================================
         System.out.println("2. Reverse a string without using built-in functions");
         String s2 = "Hello World"; // OUTPUT: "dlroW olleH"
 //        -----------------------------------------------------------------------------
+
         //1st Way
         StringBuilder sb = new StringBuilder();
         for (int i=s2.length(); i>=1; i--){
@@ -59,13 +73,26 @@ public class SelfPracticeString {
         System.out.println("3. Check if two strings are anagrams");
         String s3a = "listen";
         String s3b = "silent"; // OUTPUT: true
+        if(s3a.length() != s3b.length()){
+            System.out.println(false);
+        }
+        char[] charArray1 = s3a.toCharArray();
+        char[] charArray2 = s3b.toCharArray();
+        Arrays.sort(charArray1);
+        Arrays.sort(charArray2);
 
+        System.out.println(charArray1.equals(charArray2));
 
         if(s3a.length() != s3b.length()){
             System.out.println(false);
         }
         char[] s3aChar = s3a.toCharArray();
         char[] s3bChar = s3b.toCharArray();
+
+
+        //
+
+
 
         Arrays.sort(s3aChar);
         Arrays.sort(s3bChar);
@@ -74,17 +101,25 @@ public class SelfPracticeString {
 //       ================================================================================================================
         System.out.println("4. Find the first non-repeated character in a string");
         String s4 = "swiss"; // OUTPUT: 'w'
-
-        Character firstNonRepeatingChar = s4.chars().mapToObj(e-> (char)e).collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting())).entrySet().stream()
-                .filter(e->e.getValue()==1).map(e->e.getKey()).findFirst().get();
+        
+        Character firstNonRepeatingChar = s4.chars().mapToObj(e-> (char)e)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet().stream()
+                .filter(e->e.getValue()==1)
+                .map(e->e.getKey())
+                .findFirst().get();
         System.out.println(firstNonRepeatingChar);
 
 //        ================================================================================================================
 
         System.out.println("5. Find the first repeated character in a string");
         String s5 = "abca"; // OUTPUT: 'a'
-        Character firstRepeatingChar = s5.chars().mapToObj(e-> (char)e).collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting())).entrySet().stream()
-                .filter(e->e.getValue()>1).map(e->e.getKey()).findFirst().get();
+        Character firstRepeatingChar = s5.chars().mapToObj(e-> (char)e)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet().stream()
+                .filter(e->e.getValue()>1)
+                .map(e->e.getKey())
+                .findFirst().get();
         System.out.println(firstRepeatingChar);
 
 //        ================================================================================================================
@@ -377,6 +412,27 @@ public class SelfPracticeString {
 //        ================================================================================================================
         System.out.println("31. Longest common prefix among a list of strings");
         String[] s31 = {"flower", "flow", "flight"}; // OUTPUT: "fl"
+        //1st way
+        String first  = s31[0];
+        for(int a=0; a<first.length(); a++){
+            char ch = first.charAt(a);
+            for(int b=1; b<s31.length; b++){
+                if(ch != s31[b].charAt(a) || i >= s31[b].length()){
+                    first = first.substring(0,a);
+                }
+            }
+        }
+        System.out.println(first);
+
+//        2nd way
+        String prefix = s31[0];
+        for(int a=1; a<s31.length; a++){
+            while(!s31[a].startsWith(prefix)){
+                prefix = prefix.substring(0, prefix.length()-1);
+            }
+        }
+        System.out.println("Using Prefix: " +prefix);
+
 //        ================================================================================================================
         System.out.println("32. Count uppercase, lowercase, digits, and special characters");
         String s32 = "Abc123@#"; // OUTPUT: upper=1, lower=2, digits=3, special=2
@@ -393,6 +449,8 @@ public class SelfPracticeString {
 //        ================================================================================================================
         String s36 = "HappynewYear";
         char[] charArray = s36.toCharArray();
+        String collect1 = s36.chars().mapToObj(x -> (char) x).distinct().map(String::valueOf).collect(Collectors.joining());
+        System.out.println(collect1);
         Set<Character> charSet = new LinkedHashSet<>();
         StringBuilder sb11 = new StringBuilder();
         for (char c: charArray){

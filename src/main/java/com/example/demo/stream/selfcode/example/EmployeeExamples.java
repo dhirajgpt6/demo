@@ -1,7 +1,9 @@
 package com.example.demo.stream.selfcode.example;
 
+import com.example.demo.stream.selfcode.dto.Employee;
 import com.example.demo.stream.selfcode.dto.Employee2;
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class EmployeeExamples {
@@ -24,7 +26,6 @@ public class EmployeeExamples {
         System.out.println(maxSalaryEmp.orElse(null));
 
 
-
 //        2. ############################################## Program to print max salary of an employee from each department ####################################################################################
         Map<String, Optional<Employee2>> maxSalaryByDepartment = empList.stream()
                 .collect(Collectors.groupingBy(Employee2::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee2::getSalary))));
@@ -32,7 +33,34 @@ public class EmployeeExamples {
         maxSalaryByDepartment.forEach((key, value) -> System.out.println(key + ":" + value));
 
 
+        empList.stream().collect(Collectors.groupingBy(Employee2::getDepartment, Collectors.maxBy(Comparator.comparingDouble(Employee2::getSalary))))
+                .entrySet().stream().forEach(entry -> System.out.println(entry.getKey() + "----:------" + entry.getValue()));
 
+
+        empList.stream()
+                .collect(Collectors.groupingBy(Employee2::getDepartment, Collectors.collectingAndThen(
+                        Collectors.toList(), e->e.stream().sorted(Comparator.comparingDouble(Employee2::getSalary).reversed()))));
+
+        //get top 3 employee by each department
+        Map<String, Employee2> rs = empList.stream().collect(Collectors.groupingBy(Employee2::getDepartment,
+                Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        e->e.stream().sorted(Comparator.comparingDouble(Employee2::getSalary)
+                                .reversed())
+                                .skip(2)
+                                .findFirst()
+                                .orElse(null)
+        )));
+        System.out.println("3rd Highest Salary Employee :" +rs);
+
+    empList.stream().collect(Collectors.groupingBy(Employee2::getDepartment,
+               Collectors.collectingAndThen(
+                       Collectors.toList(),
+                       list->list.stream().sorted(Comparator.comparing(Employee2::getSalary)
+                               .reversed())
+                               .skip(2)
+                               .findFirst()
+                               .orElse(null))));
 
 //        3.############################################ Program to print active and inactive employees in the given collection  ####################################################################################
 

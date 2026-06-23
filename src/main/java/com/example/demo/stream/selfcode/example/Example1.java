@@ -1,6 +1,8 @@
 package com.example.demo.stream.selfcode.example;
 
 import com.example.demo.stream.selfcode.dto.Employee;
+import org.aspectj.weaver.ast.Call;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,3 +38,4 @@ public class Example1 {
 
     }
 }
+

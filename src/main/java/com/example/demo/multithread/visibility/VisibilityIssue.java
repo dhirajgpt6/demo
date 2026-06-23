@@ -11,6 +11,7 @@ public class VisibilityIssue {
     public void runTask() {
         System.out.println("Task started...");
         while (running) {
+            System.out.println("I'm going to sleep..." + running);
             // Busy loop
             // Thread may NEVER see running=false
         }

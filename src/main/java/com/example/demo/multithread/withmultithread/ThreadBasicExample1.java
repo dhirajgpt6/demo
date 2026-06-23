@@ -1,5 +1,7 @@
 package com.example.demo.multithread.withmultithread;
 
+import jakarta.persistence.*;
+
 public class ThreadBasicExample1 {
     public static void main(String[] args) {
         Runnable task = new MyRunnable();
@@ -7,9 +9,8 @@ public class ThreadBasicExample1 {
                 System.out.println(Thread.currentThread().getName());
         };
 
-
         Thread t1 = new Thread(task);
-        t1.run();
+        t1.start();
 
         Thread t2 = new Thread(task1);
         t2.start();
@@ -29,3 +30,4 @@ class MyRunnable implements Runnable {
         );
     }
 }
+

@@ -2,6 +2,11 @@ package com.example.demo.diexample;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
+
+import java.net.http.HttpClient;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainClass {
 
@@ -24,3 +29,8 @@ public class MainClass {
 //         car3.start();
     }
 }
+
+
+
+
+
